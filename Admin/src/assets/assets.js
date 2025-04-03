@@ -6,6 +6,7 @@ import add_song from './add_song.png'
 import audios_upload from './audios_upload.jpg'
 import music from './music.png'
 import spotify_logo from './spotify_logo.png'
+import songUploaded from './images.png'
 
 export const assets ={
     add_icon,
@@ -16,6 +17,7 @@ export const assets ={
     add_album,
     profile_image,
     upload_area,
+    songUploaded
 }
 
 export const url = 'http://localhost:4000'

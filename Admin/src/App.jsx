@@ -1,10 +1,10 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import AddSong from './pages/AddSong';
 import AddAlbum from './pages/AddAlbum';
 import ListSong from './pages/ListSong';
 import ListAlbum from './pages/ListAlbum';
+
 import Sidebar from './components/Sidebar';
 
 const App = () => {

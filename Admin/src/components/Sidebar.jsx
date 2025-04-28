@@ -1,35 +1,63 @@
-import React from 'react'
-import {assets} from '../assets/assets'
-import {NavLink} from 'react-router-dom'
+import React from 'react';
+import { assets } from '../assets/assets';
+import { NavLink } from 'react-router-dom';
+
 const Sidebar = () => {
   return (
-    <div className='bg-[#003A10] min-h-screen pl-[4vw]'>
-      <img src={assets.spotify_logo} className='mt-5 w-[max(10vw, 100px)] mr-5 hidden sm:block' alt="" />
-      <img src={assets.spotify_logo} className='mt-5 w-[max(2vw, 40px)] mr-5 sm:hidden block' alt="" />
-      <div className='flex flex-col gap-5 mt-10'>
-        <NavLink  to="/add-song" className='flex items-center gap-2.5 text-white  font-black p-2 pr-[max(8vw,10px)] drop-shadow-[-2px_2px_#00FF5B] text-sm font-medium'
+    <div className="bg-[#003A10] min-h-screen p-5 flex flex-col gap-8">
+      <img
+        src={assets.spotify_logo}
+        className="w-[max(12vw, 120px)] h-auto mx-auto sm:block transition-transform duration-300 transform hover:scale-110"
+        alt="Spotify Logo"
+      />
+      <div className="flex flex-col gap-6 mt-10">
+        <NavLink
+          to="/add-song"
+          className="flex items-center gap-4 text-white font-semibold p-4 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-[#004f1b] hover:shadow-xl hover:shadow-[#00FF5B]/50"
         >
-          <img src={assets.add_song} className='w-5' alt="" />
-          <p className='hidden sm:block'>Add Song</p>
+          <img
+            src={assets.add_song}
+            className="w-6 transition-transform duration-300 transform hover:scale-110"
+            alt="Add Song"
+          />
+          <span className="hidden sm:block">Add Song</span>
         </NavLink>
-        <NavLink  to="/list-song"  className='flex items-center gap-2.5 text-white  font-black p-2 pr-[max(8vw,10px)] drop-shadow-[-2px_2px_#00FF5B] text-sm font-medium'
+        <NavLink
+          to="/list-song"
+          className="flex items-center gap-4 text-white font-semibold p-4 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-[#004f1b] hover:shadow-xl hover:shadow-[#00FF5B]/50"
         >
-          <img src={assets.music} className='w-5' alt="" />
-          <p className='hidden sm:block'>List Song</p>
+          <img
+            src={assets.music}
+            className="w-6 transition-transform duration-300 transform hover:scale-110"
+            alt="List Song"
+          />
+          <span className="hidden sm:block">List Song</span>
         </NavLink>
-        <NavLink  to="/add-album"  className='flex items-center gap-2.5 text-white  font-black p-2 pr-[max(8vw,10px)] drop-shadow-[-2px_2px_#00FF5B] text-sm font-medium'
+        <NavLink
+          to="/add-album"
+          className="flex items-center gap-4 text-white font-semibold p-4 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-[#004f1b] hover:shadow-xl hover:shadow-[#00FF5B]/50"
         >
-          <img src={assets.add_album} className='w-5' alt="" />
-          <p className='hidden sm:block'>Add Album</p>
+          <img
+            src={assets.add_album}
+            className="w-6 transition-transform duration-300 transform hover:scale-110"
+            alt="Add Album"
+          />
+          <span className="hidden sm:block">Add Album</span>
         </NavLink>
-        <NavLink  to="/list-album"  className='flex items-center gap-2.5 text-white  font-black p-2 pr-[max(8vw,10px)] drop-shadow-[-2px_2px_#00FF5B] text-sm font-medium'
+        <NavLink
+          to="/list-album"
+          className="flex items-center gap-4 text-white font-semibold p-4 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-[#004f1b] hover:shadow-xl hover:shadow-[#00FF5B]/50"
         >
-          <img src={assets.add_album} className='w-5' alt="" />
-          <p className='hidden sm:block'>List Album</p>
+          <img
+            src={assets.add_album}
+            className="w-6 transition-transform duration-300 transform hover:scale-110"
+            alt="List Album"
+          />
+          <span className="hidden sm:block">List Album</span>
         </NavLink>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

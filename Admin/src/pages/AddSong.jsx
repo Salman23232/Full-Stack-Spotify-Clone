@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
-import { assets } from '../assets/assets';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import { useCallback, useEffect, useState } from "react";
+import { assets } from "../assets/assets";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const AddSong = () => {
-  const [image, setImage] = useState(false);
-  const [song, setSong] = useState(false);
+  const [image, setImage] = useState(null);
+  const [song, setSong] = useState(null);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [album, setAlbum] = useState("none");
@@ -14,29 +14,33 @@ const AddSong = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (!song || !image || !name || !desc) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append('name', name);
-      formData.append('desc', desc);
-      formData.append('image', image);
-      formData.append('audio', song);
-      formData.append('album', album);
+      formData.append("name", name);
+      formData.append("desc", desc);
+      formData.append("image", image);
+      formData.append("audio", song);
+      formData.append("album", album);
 
-      const response = await axios.post(`http://localhost:4000/api/song/add`, formData);
-      if (response.data.success) {
-        toast.success("Song added");
+      const { data } = await axios.post("http://localhost:4000/api/song/add", formData);
+      if (data.success) {
+        toast.success("🎉 Song added successfully!");
         setName("");
         setDesc("");
         setAlbum("none");
-        setImage(false);
-        setSong(false);
+        setImage(null);
+        setSong(null);
       } else {
-        toast.error("Something went wrong");
+        toast.error("Failed to add song.");
       }
     } catch (error) {
-      console.log(error);
-      toast.error(`Error!! ${error.message}`);
+      console.error(error);
+      toast.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -44,12 +48,12 @@ const AddSong = () => {
 
   const loadAlbumData = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/album/list`);
-      if (response.data.success) {
-        setAlbumData(response.data.albums); // ✅ Correctly setting album data
+      const { data } = await axios.get("http://localhost:4000/api/album/list");
+      if (data.success) {
+        setAlbumData(data.albums);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   }, []);
 
@@ -57,52 +61,115 @@ const AddSong = () => {
     loadAlbumData();
   }, [loadAlbumData]);
 
-  useEffect(() => {
-    console.log(albumData); // ✅ Logs the correct album data after state update
-  }, [albumData]);
+  return (
+    <form
+      onSubmit={onSubmitHandler}
+      className="bg-white p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto mt-12 flex flex-col gap-8 animate-fadeIn border border-gray-200 transition-all hover:shadow-3xl"
+    >
+      <h2 className="text-4xl font-bold text-primary text-center mb-6 animate-slideInUp">
+        🎶 Upload New Song
+      </h2>
 
-  return loading ? (
-    <div className='flex justify-center place-items-center min-h-[80vh]'>
-      <div className='w-16 h-16 place-self-center border-4 border-gray-400 border-t-green-800 rounded-full animate-spin'></div>
-    </div>
-  ) : (
-    <form onSubmit={onSubmitHandler} className='flex flex-col items-start gap-8 text-gray-600'>
-      <div className='flex gap-10'>
-        <div className='flex-col gap-8 items-center'>
-          <p>Upload song</p>
-          <input onChange={(e) => setSong(e.target.files[0])} type="file" id='song' accept='audio/*' hidden />
-          <label htmlFor="song">
-            <img src={song ? assets.songUploaded : assets.audios_upload} className='w-48 h-40 object-fit mt-5 cursor-pointer' alt="" />
+      {/* Upload Areas */}
+      <div className="flex flex-col md:flex-row gap-12 justify-center items-center">
+        {/* Song Upload */}
+        <div className="flex flex-col items-center gap-4 group">
+          <p className="text-gray-700 font-semibold">Upload Audio</p>
+          <input
+            onChange={(e) => setSong(e.target.files?.[0] || null)}
+            type="file"
+            id="song"
+            accept="audio/*"
+            hidden
+          />
+          <label htmlFor="song" className="cursor-pointer transition-transform hover:scale-105">
+            <div className="w-48 h-40 flex justify-center items-center rounded-2xl border-2 border-dashed border-gray-300 hover:border-primary bg-gray-50 shadow-md overflow-hidden relative">
+              <img
+                src={song ? assets.songUploaded : assets.audios_upload}
+                alt="Upload Song"
+                className="w-20 h-20 object-contain animate-bounce"
+              />
+            </div>
           </label>
         </div>
-        <div className='flex flex-col gap-4'>
-          <p>Upload Image</p>
-          <input onChange={(e) => setImage(e.target.files[0])} type='file' id='image' accept='image/*' hidden />
-          <label htmlFor="image">
-            <img src={image ? URL.createObjectURL(image) : assets.upload_area} className='w-48 h-40 cursor-pointer' alt="" />
+
+        {/* Image Upload */}
+        <div className="flex flex-col items-center gap-4 group">
+          <p className="text-gray-700 font-semibold">Upload Cover</p>
+          <input
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
+            type="file"
+            id="image"
+            accept="image/*"
+            hidden
+          />
+          <label htmlFor="image" className="cursor-pointer transition-transform hover:scale-105">
+            <div className="w-48 h-40 flex justify-center items-center rounded-2xl border-2 border-dashed border-gray-300 hover:border-primary bg-gray-50 shadow-md overflow-hidden relative">
+              <img
+                src={image ? URL.createObjectURL(image) : assets.upload_area}
+                alt="Upload Cover"
+                className="w-full h-full object-cover rounded-xl transition-transform group-hover:scale-110"
+              />
+            </div>
           </label>
         </div>
       </div>
-      <div className='flex flex-col gap-2.5'>
-        <p>Song name</p>
-        <input onChange={(e) => setName(e.target.value)} value={name} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[max(40vw, 250px)]' placeholder='Type Here' type="text" required />
+
+      {/* Input Fields */}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <p className="text-gray-700 font-semibold">Song Name</p>
+          <input
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Enter the song name..."
+            className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <p className="text-gray-700 font-semibold">Description</p>
+          <input
+            type="text"
+            onChange={(e) => setDesc(e.target.value)}
+            value={desc}
+            placeholder="Short description..."
+            className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+            required
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <p className="text-gray-700 font-semibold">Select Album</p>
+          <select
+            onChange={(e) => setAlbum(e.target.value)}
+            value={album}
+            className="p-3 rounded-xl border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+          >
+            <option value="none">None</option>
+            {albumData.map((item, index) => (
+              <option key={index} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
-      <div className='flex flex-col gap-2.5'>
-        <p>Song description</p>
-        <input onChange={(e) => setDesc(e.target.value)} value={desc} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[max(40vw, 250px)]' placeholder='Type Here' type="text" required />
-      </div>
-      <div className='flex flex-col gap-2.5'>
-        <p>Album</p>
-        <select onChange={(e) => setAlbum(e.target.value)} value={album} className='bg-transparent outline-green-600 border-2 border-gray-400 p-2.5 w-[150px]'>
-          <option value="none">None</option>
-          {albumData.map((item, index) => (
-            <option key={index} value={item.name}>{item.name}</option>
-          ))}
-        </select>
-      </div>
-      <button type='submit' className='text-base bg-black text-white py-2.5 px-14 cursor-pointer'>ADD</button>
+
+      {/* Submit Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className={`w-full py-3 mt-6 rounded-xl bg-green-600 from-primary to-secondary text-white font-semibold text-lg shadow-lg hover:shadow-2xl transition-all duration-300 ${
+          loading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"
+        }`}
+      >
+        {loading ? "Uploading..." : "Add Song"}
+      </button>
     </form>
   );
-}
+};
 
 export default AddSong;

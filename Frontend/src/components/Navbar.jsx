@@ -1,3 +1,4 @@
+import { UserButton } from "@clerk/clerk-react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import {Link} from 'react-router-dom'
@@ -28,12 +29,7 @@ const Navbar = () => {
             Dashboard
           </p>
           </Link>
-          <p className="bg-black py-1 px-3 rounded-2xl text-[15px] cursor-pointer">
-            Install App
-          </p>
-          <p className="bg-purple-500 text-black w-7 h-7 rounded-full flex item-center justify-center">
-            G
-          </p>
+          <UserButton/>
         </div>
       </div>
     </>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { FaBars } from "react-icons/fa6"; // Sidebar/Menu Icon
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(true);
@@ -52,18 +53,23 @@ const Sidebar = () => {
           <div className="bg-[#1f1f1f] p-4 rounded-xl flex flex-col gap-2 hover:shadow-[0_0_20px_4px_rgba(0,255,150,0.35)] transition-all">
             <h1 className="text-[14px] font-bold text-glow">Create your first playlist</h1>
             <p className="text-sm text-gray-400">It's easy, we'll help you</p>
+            <Link to={'http://localhost:5174/add-album'}>
+
             <button className="mt-2 px-5 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black rounded-full text-sm font-bold hover:scale-105 transition-all">
-              Create Playlist
+              Create Album
             </button>
+            </Link>
           </div>
 
           {/* Playlist Card 2 */}
           <div className="bg-[#1f1f1f] p-4 rounded-xl flex flex-col gap-2 hover:shadow-[0_0_20px_4px_rgba(0,255,150,0.35)] transition-all">
             <h1 className="text-[14px] font-bold text-glow">Follow your first podcast</h1>
             <p className="text-sm text-gray-400">We'll keep you updated on new episodes</p>
+            <Link to={'http://localhost:5174/add-song'}>
             <button className="mt-2 px-5 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black rounded-full text-sm font-bold hover:scale-105 transition-all">
-              Browse Podcasts
+              Add Music
             </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -25,6 +25,7 @@ import {
 // Pages
 import DisplayHome from "./components/DisplayHome";
 import DisplayAlbum from "./components/DisplayAlbum";
+import Navbar from "./components/Navbar";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -39,7 +40,7 @@ const AppLayout = () => {
             <>
               <div className="h-[90%] flex">
                 <Sidebar />
-                <div className="flex-1 overflow-auto p-4">
+                <div className="flex-1 p-4">
                   {/* Render nested routes here */}
                   <Outlet />
                 </div>

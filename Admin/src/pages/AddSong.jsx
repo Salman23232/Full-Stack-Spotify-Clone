@@ -130,12 +130,12 @@ const AddSong = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="text-gray-700 font-semibold">Description</p>
+          <p className="text-gray-700 font-semibold">Song Artist</p>
           <input
             type="text"
             onChange={(e) => setDesc(e.target.value)}
             value={desc}
-            placeholder="Short description..."
+            placeholder="Justin..."
             className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
             required
           />

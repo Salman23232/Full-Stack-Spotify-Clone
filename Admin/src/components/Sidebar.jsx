@@ -1,15 +1,17 @@
-import React from 'react';
-import { assets } from '../assets/assets';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { assets } from "../assets/assets";
+import { Link, NavLink } from "react-router-dom";
+import { Music2 } from "lucide-react";
 
 const Sidebar = () => {
   return (
     <div className="bg-[#003A10] min-h-screen p-5 flex flex-col gap-8">
-      <img
-        src={assets.spotify_logo}
-        className="w-[max(12vw, 120px)] h-auto mx-auto sm:block transition-transform duration-300 transform hover:scale-110"
-        alt="Spotify Logo"
-      />
+      <h2 className="text-xl font-bold mb-16 px-2 text-green-400 tracking-wider flex items-center gap-2 font-sans">
+        <Link to={'/'} className="bg-[#0f0f0f] w-8 h-8 flex justify-center items-center text-green-400 rounded-full shadow-[0_0_10px_2px_rgba(0,255,150,0.4)] hover:scale-105 transition-all duration-300">
+          <Music2 size={20} />
+        </Link>
+        Musify
+      </h2>
       <div className="flex flex-col gap-6 mt-10">
         <NavLink
           to="/add-song"

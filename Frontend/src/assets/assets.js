@@ -65,7 +65,6 @@ export const assets = {
     pause_icon,
     arrow_left,
     arrow_right,
-    spotify_logo,
     clock_icon
 }
 

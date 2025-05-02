@@ -18,7 +18,10 @@ connectCloudinary();
 
 //middlewares
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin:['https://adminmusify.vercel.app/', 'https://musify-lake-one.vercel.app/']
+}
+))
     
 // initializing routes
 app.use("/api/song",songRouter) 

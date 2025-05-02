@@ -7,7 +7,7 @@ const ListAlbum = () => {
 
   const fetchAlbums = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/album/list`);
+      const response = await axios.get(`https://full-stack-spotify-clone-4.onrender.com/api/album/list`);
       if (response.data.success) {
         setData(response.data.albums);
       }
@@ -23,7 +23,7 @@ const ListAlbum = () => {
   const removeAlbum = async (id) => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/album/remove`,
+        `https://full-stack-spotify-clone-4.onrender.com/api/album/remove`,
         { id }
       );
       if (response.data.success) {

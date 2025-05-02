@@ -42,7 +42,7 @@ const PlayerContextProvider = ({ children }) => {
 
   const fetchSongs = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/song/list");
+      const res = await axios.get("https://full-stack-spotify-clone-4.onrender.com/api/song/list");
       if (res.data?.songs?.length) {
         setSongsData(res.data.songs);
         setTrack(res.data.songs[0]);
@@ -54,7 +54,7 @@ const PlayerContextProvider = ({ children }) => {
 
   const fetchAlbums = async () => {
     try {
-      const res = await axios.get("http://localhost:4000/api/album/list");
+      const res = await axios.get("https://full-stack-spotify-clone-4.onrender.com/api/album/list");
       if (res.data?.albums) {
         setAlbumsData(res.data.albums);
       }

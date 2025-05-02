@@ -21,7 +21,7 @@ const AddAlbum = () => {
       formData.append("image", image);
       formData.append("bgColor", color);
 
-      const response = await axios.post(`http://localhost:4000/api/album/add`, formData);
+      const response = await axios.post(`https://full-stack-spotify-clone-4.onrender.com/api/album/add`, formData);
 
       if (response.data.success) {
         toast.success("Album added successfully!");

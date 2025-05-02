@@ -7,7 +7,7 @@ const ListSong = () => {
 
   const fetchSongs = useCallback(async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/song/list`);
+      const response = await axios.get(`https://full-stack-spotify-clone-4.onrender.com/api/song/list`);
       if (response.data.success) {
         setData(response.data.songs);
       }
@@ -19,7 +19,7 @@ const ListSong = () => {
 
   const removeSong = async (id) => {
     try {
-      const response = await axios.post(`http://localhost:4000/api/song/remove`, { id });
+      const response = await axios.post(`https://full-stack-spotify-clone-4.onrender.com/api/song/remove`, { id });
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchSongs();

@@ -27,7 +27,7 @@ const AddSong = () => {
       formData.append("audio", song);
       formData.append("album", album);
 
-      const { data } = await axios.post("http://localhost:4000/api/song/add", formData);
+      const { data } = await axios.post("https://full-stack-spotify-clone-4.onrender.com/api/song/add", formData);
       if (data.success) {
         toast.success("🎉 Song added successfully!");
         setName("");
@@ -48,7 +48,7 @@ const AddSong = () => {
 
   const loadAlbumData = useCallback(async () => {
     try {
-      const { data } = await axios.get("http://localhost:4000/api/album/list");
+      const { data } = await axios.get("https://full-stack-spotify-clone-4.onrender.com/api/album/list");
       if (data.success) {
         setAlbumData(data.albums);
       }

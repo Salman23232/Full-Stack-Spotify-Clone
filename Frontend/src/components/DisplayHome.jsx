@@ -1,10 +1,10 @@
-import { useContext, useRef, useState } from 'react';
-import Navbar from './Navbar';
-import AlbumItem from './AlbumItem';
-import SongItems from './SongItems';
-import { PlayerContext } from '../context/PlayerContext';
-import { ChevronLeft, ChevronRight } from 'lucide-react'; // Icon library (you can use others too)
-import Sidebar2 from './Sidebar';
+import { useContext, useRef, useState } from "react";
+import Navbar from "./Navbar";
+import AlbumItem from "./AlbumItem";
+import SongItems from "./SongItems";
+import { PlayerContext } from "../context/PlayerContext";
+import { ChevronLeft, ChevronRight } from "lucide-react"; // Icon library (you can use others too)
+import Sidebar2 from "./Sidebar2";
 
 const Slider = ({ children, title }) => {
   const scrollRef = useRef();
@@ -13,8 +13,11 @@ const Slider = ({ children, title }) => {
     if (!scrollRef.current) return;
     const { scrollLeft, clientWidth } = scrollRef.current;
     scrollRef.current.scrollTo({
-      left: direction === 'left' ? scrollLeft - clientWidth : scrollLeft + clientWidth,
-      behavior: 'smooth',
+      left:
+        direction === "left"
+          ? scrollLeft - clientWidth
+          : scrollLeft + clientWidth,
+      behavior: "smooth",
     });
   };
 
@@ -23,7 +26,7 @@ const Slider = ({ children, title }) => {
       <h1 className="text-2xl font-bold text-white mb-2">{title}</h1>
       <div className="relative">
         <button
-          onClick={() => scroll('left')}
+          onClick={() => scroll("left")}
           className="absolute left-0 top-[40%] z-10 bg-black bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90"
         >
           <ChevronLeft />
@@ -35,7 +38,7 @@ const Slider = ({ children, title }) => {
           {children}
         </div>
         <button
-          onClick={() => scroll('right')}
+          onClick={() => scroll("right")}
           className="absolute right-0 top-[40%] z-10 bg-black bg-opacity-70 text-white p-2 rounded-full hover:bg-opacity-90"
         >
           <ChevronRight />
@@ -47,7 +50,7 @@ const Slider = ({ children, title }) => {
 
 const DisplayHome = () => {
   const { songsData, albumsData } = useContext(PlayerContext);
-  const [tab, setTab] = useState('all');
+  const [tab, setTab] = useState("all");
 
   if (!songsData || songsData.length === 0) {
     return <div className="text-white text-center mt-20">Loading...</div>;
@@ -61,12 +64,12 @@ const DisplayHome = () => {
         <Navbar />
 
         <div className="flex items-center gap-3 mt-20 px-4 z-50">
-          {['all', 'albums', 'musics'].map((type) => (
+          {["all", "albums", "musics"].map((type) => (
             <button
               key={type}
               onClick={() => setTab(type)}
               className={`px-4 py-1 rounded-2xl font-semibold transition-all duration-300 ${
-                tab === type ? 'bg-green-400 text-black' : 'bg-black text-white'
+                tab === type ? "bg-green-400 text-black" : "bg-black text-white"
               }`}
             >
               {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -75,7 +78,7 @@ const DisplayHome = () => {
         </div>
 
         <div className="px-4 mt-8 mb-12">
-          {(tab === 'all' || tab === 'musics') && (
+          {(tab === "all" || tab === "musics") && (
             <Slider title="Today's Biggest Hits">
               {songsData.map((item, index) => (
                 <SongItems
@@ -89,7 +92,7 @@ const DisplayHome = () => {
             </Slider>
           )}
 
-          {(tab === 'all' || tab === 'albums') && (
+          {(tab === "all" || tab === "albums") && (
             <Slider title="Featured Charts">
               {albumsData.map((item, index) => (
                 <AlbumItem

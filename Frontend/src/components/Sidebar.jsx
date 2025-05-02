@@ -1,48 +1,84 @@
-import { useContext } from "react";
-import { PlayerContext } from "../context/PlayerContext";
-import { Music2 } from "lucide-react";
-import {Link} from 'react-router-dom'
+import { useState } from "react";
+import { assets } from "../assets/assets";
+import { FaBars } from "react-icons/fa6"; // Sidebar/Menu Icon
+import { Link } from "react-router-dom";
 
-const Sidebar2 = () => {
-  const { songsData, playWithId, track } = useContext(PlayerContext);
+const Sidebar = () => {
+  const [openSidebar, setOpenSidebar] = useState(true);
 
   return (
-    <div className="hidden md:flex">
-      <div className="h-screen w-[250px] p-4 pt-8 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] text-white fixed top-0 left-0 z-40 shadow-[0_0_30px_5px_rgba(0,255,150,0.25)] overflow-y-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-transparent">
-        <h2 className="text-xl font-bold mb-16 px-2 text-green-400 tracking-wider flex items-center gap-2 font-sans">
-          <Link to={'/'}
-                  className="bg-[#0f0f0f] w-8 h-8 flex justify-center items-center text-green-400 rounded-full shadow-[0_0_10px_2px_rgba(0,255,150,0.4)] hover:scale-105 transition-all duration-300"
-                >
-                  <Music2 size={20} />
-                </Link>
-          Musify
-          </h2>
+    <div className="relative flex z-50">
+      {/* Sidebar Toggle Button */}
+      <button
+        className="absolute top-4 left-4 z-50 p-2 bg-[#0f0f0f] text-green-400 rounded-full shadow-[0_0_10px_2px_rgba(0,255,150,0.4)] hover:scale-105 transition-all duration-300"
+        onClick={() => setOpenSidebar(!openSidebar)}
+      >
+        <FaBars size={20} />
+      </button>
 
-        <div className="flex flex-col gap-3">
-          {songsData?.map((song) => (
-            <div
-              key={song._id}
-              onClick={() => playWithId(song._id)}
-              className={`flex items-center gap-4 p-3 rounded-xl cursor-pointer transition-all duration-300 hover:scale-105
-                ${track?._id === song._id
-                  ? "bg-green-500/20 border border-green-400 text-green-300 shadow-[0_0_15px_rgba(0,255,150,0.4)]"
-                  : "hover:bg-white/10 hover:text-green-300"}`}
-            >
-              <img
-                src={song.image}
-                alt={song.name}
-                className="w-12 h-12 rounded-full object-cover shadow-[0_0_10px_rgba(0,255,150,0.5)] hover:shadow-[0_0_15px_rgba(0,255,150,0.7)] transition-all duration-300"
-              />
-              <div className="flex-1 overflow-hidden">
-                <p className="text-sm font-bold truncate">{song.name}</p>
-                <p className="text-sm truncate">{song.desc}</p>
-              </div>
+      {/* Sidebar */}
+      <div
+        className={`h-[100vh] p-4 pt-16 text-white bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f] 
+                    ${openSidebar ? 'w-[250px] opacity-100' : 'w-0 opacity-0'} 
+                    fixed top-0 left-0 z-40 transition-all duration-500 ease-in-out 
+                    shadow-[0_0_30px_5px_rgba(0,255,150,0.25)]`}
+      >
+        {/* Top Links */}
+        <div className="flex flex-col gap-4 bg-[#121212] rounded-xl p-4 shadow-[0_0_20px_5px_rgba(0,255,150,0.25)]">
+          <div className="flex items-center gap-3 cursor-pointer text-glow hover:text-green-400 transition-all">
+            <img src={assets.home_icon} alt="Home" className="w-5" />
+            <Link to={'/'}>
+            <p className="font-bold text-[16px]">Home</p>
+            </Link>
+          </div>
+          <div className="flex items-center gap-3 cursor-pointer text-glow hover:text-green-400 transition-all">
+            {/* <img src={assets.search_icon} alt="Search" className="w-5" /> */}
+            {/* <p className="font-bold text-[16px]">Search</p> */}
+          </div>
+        </div>
+
+        {/* Library Section */}
+        <div className="flex-1 bg-[#121212] rounded-xl p-4 flex flex-col gap-4 shadow-[0_0_20px_5px_rgba(0,255,150,0.25)]">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 text-glow">
+              <img src={assets.stack_icon} className="w-6" alt="Library" />
+              <p className="font-semibold text-[16px]">Your Library</p>
             </div>
-          ))}
+            <div className="flex items-center gap-2">
+              <img src={assets.arrow_icon} className="w-4 cursor-pointer hover:scale-125 transition-transform" alt="Arrow" />
+              <img src={assets.plus_icon} className="w-4 cursor-pointer hover:scale-125 transition-transform" alt="Plus" />
+            </div>
+          </div>
+
+          {/* Playlist Card 1 */}
+          <div className="bg-[#1f1f1f] p-4 rounded-xl flex flex-col gap-2 hover:shadow-[0_0_20px_4px_rgba(0,255,150,0.35)] transition-all">
+            <h1 className="text-[14px] font-bold text-glow">Create your first playlist</h1>
+            <p className="text-sm text-gray-400">Its easy, we will help you</p>
+            <Link to={'https://adminmusify.vercel.app/add-album'}>
+
+            <button className="mt-2 px-5 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black rounded-full text-sm font-bold hover:scale-105 transition-all">
+              Create Album
+            </button>
+            </Link>
+          </div>
+
+          {/* Playlist Card 2 */}
+          <div className="bg-[#1f1f1f] p-4 rounded-xl flex flex-col gap-2 hover:shadow-[0_0_20px_4px_rgba(0,255,150,0.35)] transition-all">
+            <h1 className="text-[14px] font-bold text-glow">Follow your first podcast</h1>
+            <p className="text-sm text-gray-400">We will keep you updated on new episodes</p>
+            <Link to={'https://adminmusify.vercel.app/add-song'}>
+            <button className="mt-2 px-5 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black rounded-full text-sm font-bold hover:scale-105 transition-all">
+              Add Music
+            </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Sidebar2;
+
+
+export default Sidebar

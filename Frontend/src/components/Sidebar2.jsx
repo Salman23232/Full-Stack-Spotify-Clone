@@ -54,7 +54,7 @@ const Sidebar = () => {
           {/* Playlist Card 1 */}
           <div className="bg-[#1f1f1f] p-4 rounded-xl flex flex-col gap-2 hover:shadow-[0_0_20px_4px_rgba(0,255,150,0.35)] transition-all">
             <h1 className="text-[14px] font-bold text-glow">Create your first playlist</h1>
-            <p className="text-sm text-gray-400">It's easy, we'll help you</p>
+            <p className="text-sm text-gray-400">Its easy, we will help you</p>
             <Link to={'https://adminmusify.vercel.app/add-album'}>
 
             <button className="mt-2 px-5 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black rounded-full text-sm font-bold hover:scale-105 transition-all">
@@ -66,7 +66,7 @@ const Sidebar = () => {
           {/* Playlist Card 2 */}
           <div className="bg-[#1f1f1f] p-4 rounded-xl flex flex-col gap-2 hover:shadow-[0_0_20px_4px_rgba(0,255,150,0.35)] transition-all">
             <h1 className="text-[14px] font-bold text-glow">Follow your first podcast</h1>
-            <p className="text-sm text-gray-400">We'll keep you updated on new episodes</p>
+            <p className="text-sm text-gray-400">We will keep you updated on new episodes</p>
             <Link to={'https://adminmusify.vercel.app/add-song'}>
             <button className="mt-2 px-5 py-2 bg-gradient-to-r from-green-400 to-green-500 text-black rounded-full text-sm font-bold hover:scale-105 transition-all">
               Add Music

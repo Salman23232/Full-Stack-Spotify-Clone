@@ -1,10 +1,10 @@
 import { useContext, useRef, useState } from 'react';
-import Sidebar2 from './sidebar2';
 import Navbar from './Navbar';
 import AlbumItem from './AlbumItem';
 import SongItems from './SongItems';
 import { PlayerContext } from '../context/PlayerContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react'; // Icon library (you can use others too)
+import Sidebar2 from './Sidebar';
 
 const Slider = ({ children, title }) => {
   const scrollRef = useRef();

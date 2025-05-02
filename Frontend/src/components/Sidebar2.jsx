@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { assets } from "../assets/assets";
 import { FaBars } from "react-icons/fa6"; // Sidebar/Menu Icon
 import { Link } from "react-router-dom";

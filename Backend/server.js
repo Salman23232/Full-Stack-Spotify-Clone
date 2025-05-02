@@ -19,7 +19,7 @@ connectCloudinary();
 //middlewares
 app.use(express.json());
 app.use(cors({
-    origin:['https://musiclovers2.onrender.com', 'https://musify-lake-one.vercel.app']
+    origin:['https://musiclovers2.onrender.com', 'https://adminmusify.vercel.app']
 }
 ))
     
